@@ -1,68 +1,71 @@
-import urllib3
-from bs4 import BeautifulSoup
-from urllib3 import request
-import urllib.request as urllib
+from bs4 import BeautifulSoup as bs
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-http = urllib3.PoolManager()
-driver = webdriver.Chrome(ChromeDriverManager().install())
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+import re
+#work headless without opening a browser
+# options = Options()
+# options.add_argument('--headless')
+# options.add_argument('--disable-gpu')  , chrome_options=options
+driver = webdriver.Chrome('/home/mozes721/Desktop/chromedriver')
 
-url = 'https://www.bbc.com/news/election/us2020/results'
-main_page = http.request('GET', url)
-
-soup = BeautifulSoup(main_page.data, 'html.parser')
+# driver = webdriver.PhantomJS('/home/mozes721/Documents/chromedriver')
+# driver.add_argument('--headless')
 
 
+#URL of website
+driver.get('https://www.politico.com/2020-election/results/president/')
 
-states = soup.find_all('ul', {'class': 'css-kx7phl-StateList e193da113'})
 
-for state in states:
-    state_link = state.find_all('a')
-    
+#print(driver.page_source)
+
+wait = WebDriverWait(driver, 10)
+state_btn = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/div[2]/div/div[1]/div/div/div/div[5]')))
+state_btn.click()
+time.sleep(5)
+#state_list = wait.until(EC.visibility_of_element_located((By.CLASS_NAME ,'mui-popper jsx-644046148')))
+
+state_list = driver.find_element_by_xpath('//*[@id="find-your-state-menu"]')
+
+#get the state names from the ul list 
 link_set = []
-def magic_link(link):
-    for each_item in link:
-        html_link = each_item.get('href')
-        if (html_link is None):
-            pass
-        else:
-            if(not (html_link.startswith('http') or html_link.startswith('https'))):
-                link_set.append('https://www.bbc.com' + html_link)
-            else:
-                link_set.append(html_link)
+for list in state_list.find_elements_by_tag_name('li'):
+    link_set.append(list.text)
 
-magic_link(state_link)
+#list comprehension to change array format
+link_set = [each_string.lower().replace('.', '').replace(',', '').replace(' ', '-') for each_string in link_set]
 
-# 51 states
-electorial_results = {}
+state_urls = []
+for link in link_set:
+    state_urls.append('https://www.politico.com/2020-election/results/' + link + '/')
+
+
+
+
+def state_scrape(link_set):
+    pass
+
+    
+
+# magic_link(state_link)
 
 
 def states_links(state_result):
-    link = driver.get(state_result)
-    soup2 = BeautifulSoup(link, 'html.parser')
-    state = soup2.find('h1', {'id': 'us-election-2020-state-results'}).text.strip().split(' ')[0]
+    # link = http.request('GET', state_result)
+    # link_page =link.data.decode('utf-8')
+    # link_soup = BeautifulSoup(link_page, 'html.parser')
+    # state = link_soup.find('h1', {'id': 'us-election-2020-state-results'}).text.strip().split(' ')[0]
+    browser.get(state_result)
     
+    browser.refresh()
+    
+    table = browser.find_elements_by_id("us-election-2020-state-results")
+    print(table.innerHTML)
 
-    body = link.find('div', {'class': 'flex-item main-table'})
-    print(body)
-    # for table_row in body:
-    #     print(table_row)
-        # cells = table_row.find_all('th')
-        # print(cells)
+# first_link = link_set[0]   
 
-        # if len(cells) > 0:
-        #     trump_votes = cells[2].text
-        #     print(trump_votes + 'adssaddsa')
-        #     print("Hello")
-    # trump_rep = soup2.find('tr', {'class': 'rep'}).text
-    # trump_votes = trump_rep.find('td', {'class': 'votes'})
-    # trump_pct = trump_rep.find('td', {'class': 'ptc'})
-
-    # biden_dem = soup2.find('tr', {'class': 'dem'})
-    # biden_votes = biden_dem.find('td', {'class': 'votes'})
-    # biden_pct = biden_dem.find('td', {'class': 'ptc'})
-
-   
-
-states_links(link_set[0])
+#states_links(first_link)
 
