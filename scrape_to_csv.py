@@ -11,6 +11,7 @@ import re
 # options.add_argument('--headless')
 # options.add_argument('--disable-gpu')  , chrome_options=options
 driver = webdriver.Chrome('/home/mozes721/Desktop/chromedriver')
+#states_driver = webdriver.Chrome('/home/mozes721/Desktop/chromedriver')
 
 # driver = webdriver.PhantomJS('/home/mozes721/Documents/chromedriver')
 # driver.add_argument('--headless')
@@ -41,31 +42,51 @@ link_set = [each_string.lower().replace('.', '').replace(',', '').replace(' ', '
 state_urls = []
 for link in link_set:
     state_urls.append('https://www.politico.com/2020-election/results/' + link + '/')
+time.sleep(5)
 
 
 
 
-def state_scrape(link_set):
-    pass
+def scrape_results(link_set):
+    trump_list = []
+    biden_list = []
+    #check for the name in the td list row
+    first_row_name = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[1]/div[1]')
+    second_row_name = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]/td[1]/div[1]')
+    #get td row values of each canditate
+    first_row = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]')
+    second_row = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]')
 
+    #if link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[1]/div[1]')
     
 
-# magic_link(state_link)
-
-
-def states_links(state_result):
-    # link = http.request('GET', state_result)
-    # link_page =link.data.decode('utf-8')
-    # link_soup = BeautifulSoup(link_page, 'html.parser')
-    # state = link_soup.find('h1', {'id': 'us-election-2020-state-results'}).text.strip().split(' ')[0]
-    browser.get(state_result)
+    if first_row_name.get_property('innerHTML') == 'Trump':
+        trump_results(first_row)
+    else:
+        biden_results(second_row)
     
-    browser.refresh()
-    
-    table = browser.find_elements_by_id("us-election-2020-state-results")
-    print(table.innerHTML)
 
-# first_link = link_set[0]   
+    if first_row_name.get_property('innerHTML') == 'Trump':
+        trump_results(second_row)
+    else:
+        biden_results(first_row)
 
-#states_links(first_link)
+def trump_results(row_val):
+    votes = row_val.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[2]').get_property('innerHTML')
+    percent = row_val.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[3]/div').get_property('innerHTML')
+    print("Trumps votes %s and precentage %s" % (votes, percent))
+
+def biden_results(row_val):
+    votes = row_val.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[2]').get_property('innerHTML')
+    percent = row_val.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[3]/div').get_property('innerHTML')
+    print("Biden votes %s and precentage %s" % (votes, percent))
+
+while True:
+    states_driver = webdriver.Chrome('/home/mozes721/Desktop/chromedriver')
+    states_driver.get(state_urls[0])
+    break
+
+
+scrape_results(states_driver)
+
 
