@@ -64,56 +64,39 @@ def scrape_results(link_set):
     #second_row_percent = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]/td[2]/div[2]')
     #get td row values of each canditate                 //*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]/td[2]/div[2]
 
-
+    #get two rows
     row1 = table.find_element_by_xpath('./tr[1]')
     row2 = table.find_element_by_xpath('./tr[2]')
 
+    list_values1 = row1.find_elements_by_tag_name('td')
+    list_values2 = row2.find_elements_by_tag_name('td')
     #get row name
     row1_name = row1.find_element_by_xpath('./td[1]/div[1]')
-    row2_name = row2.find_element_by_xpath('.//td[1]/div[1]')
+    # row2_name = row2.find_element_by_xpath('.//td[1]/div[1]')
 
     #row1_votes = row1.find_element_by_xpath('./td[2]/div[2]')
     #row1_percentage = row1.find_element_by_xpath('./td[2]/div[1]')
 
     if row1_name.get_property('innerHTML') == 'Joe Biden':
-        print('######FIRST ROW CHOSEN####')
-        list_values1 = row1.find_elements_by_tag_name('td')
         biden_results(list_values1)
+        trump_results(list_values2)
     else:
-        print('######SECOND ROW CHOSEN####')
-        list_values2 = row2.find_elements_by_tag_name('td')
         biden_results(list_values2)
-        # for values in list_values:
-        #     data = values.get_property('innerText')
-        #     biden_results(data)
-        
-        # votes = biden_list[1]
-        # percentage = biden_list[2]
-        # biden_results(votes, percentage)
-        
+        trump_results(list_values1)
 
 
 
 
 def trump_results(list):               
-    
-    data = list.get_property('innerText')
-    new_data = data.split('/n')
-    votes = new_data[1]
-    percent = new_data[2]
+    votes = list[1].text 
+    percent = list[2].text
     print("Trumps votes %s and precentage %s" % (votes, percent))
     
 def biden_results(list):
-#    biden = []
-#    for values in list:
-#         data = values.get_property('innerText')
-#         biden.append(data)
-#    print(biden)
-    values = list.get_property('innerText')
-    print(values)
-#         votes = new_data[1]
-#         percent = new_data[2]
-#    print("Biden votes %s and precentage %s" % (votes, percent))
+    votes = list[1].text 
+    percent = list[2].text
+    print("Biden votes %s and precentage %s" % (votes, percent))
+
 
 while True:
     states_driver = webdriver.Chrome('/home/mozes721/Desktop/chromedriver')
