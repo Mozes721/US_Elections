@@ -27,7 +27,6 @@ wait = WebDriverWait(driver, 10)
 state_btn = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/div[2]/div/div[1]/div/div/div/div[5]')))
 state_btn.click()
 time.sleep(5)
-#state_list = wait.until(EC.visibility_of_element_located((By.CLASS_NAME ,'mui-popper jsx-644046148')))
 
 state_list = driver.find_element_by_xpath('//*[@id="find-your-state-menu"]')
 
@@ -50,40 +49,75 @@ time.sleep(5)
 def scrape_results(link_set):
     trump_list = []
     biden_list = []
-    #check for the name in the td list row
-    first_row_name = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[1]/div[1]')
+
+    table = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody')
+
+    first_row_name = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]/td[1]/div[1]')
     second_row_name = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]/td[1]/div[1]')
-    #get td row values of each canditate
-    first_row = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]')
-    second_row = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]')
 
-    #if link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[1]/div[1]')
+    #first row votes and percent                      
+    #first_row_votes = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[2]/div[2]')
+    #first_row_percent = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[2]/div[1]')
     
+    #second row votes and percent
+    #second_row_votes = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]/td[2]/div[2]')
+    #second_row_percent = link_set.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]/td[2]/div[2]')
+    #get td row values of each canditate                 //*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]/td[2]/div[2]
 
-    if first_row_name.get_property('innerHTML') == 'Trump':
-        trump_results(first_row)
+
+    row1 = table.find_element_by_xpath('./tr[1]')
+    row2 = table.find_element_by_xpath('./tr[2]')
+
+    #get row name
+    row1_name = row1.find_element_by_xpath('./td[1]/div[1]')
+    row2_name = row2.find_element_by_xpath('.//td[1]/div[1]')
+
+    #row1_votes = row1.find_element_by_xpath('./td[2]/div[2]')
+    #row1_percentage = row1.find_element_by_xpath('./td[2]/div[1]')
+
+    if row1_name.get_property('innerHTML') == 'Joe Biden':
+        print('######FIRST ROW CHOSEN####')
+        list_values1 = row1.find_elements_by_tag_name('td')
+        biden_results(list_values1)
     else:
-        biden_results(second_row)
+        print('######SECOND ROW CHOSEN####')
+        list_values2 = row2.find_elements_by_tag_name('td')
+        biden_results(list_values2)
+        # for values in list_values:
+        #     data = values.get_property('innerText')
+        #     biden_results(data)
+        
+        # votes = biden_list[1]
+        # percentage = biden_list[2]
+        # biden_results(votes, percentage)
+        
+
+
+
+
+def trump_results(list):               
     
-
-    if first_row_name.get_property('innerHTML') == 'Trump':
-        trump_results(second_row)
-    else:
-        biden_results(first_row)
-
-def trump_results(row_val):
-    votes = row_val.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[2]').get_property('innerHTML')
-    percent = row_val.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[3]/div').get_property('innerHTML')
+    data = list.get_property('innerText')
+    new_data = data.split('/n')
+    votes = new_data[1]
+    percent = new_data[2]
     print("Trumps votes %s and precentage %s" % (votes, percent))
-
-def biden_results(row_val):
-    votes = row_val.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[2]').get_property('innerHTML')
-    percent = row_val.find_element_by_xpath('//*[@id="__next"]/div[5]/div[1]/div/div[1]/div[1]/div[2]/table/tbody/tr[1]/td[3]/div').get_property('innerHTML')
-    print("Biden votes %s and precentage %s" % (votes, percent))
+    
+def biden_results(list):
+#    biden = []
+#    for values in list:
+#         data = values.get_property('innerText')
+#         biden.append(data)
+#    print(biden)
+    values = list.get_property('innerText')
+    print(values)
+#         votes = new_data[1]
+#         percent = new_data[2]
+#    print("Biden votes %s and precentage %s" % (votes, percent))
 
 while True:
     states_driver = webdriver.Chrome('/home/mozes721/Desktop/chromedriver')
-    states_driver.get(state_urls[0])
+    states_driver.get(state_urls[1])
     break
 
 
