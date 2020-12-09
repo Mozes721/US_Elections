@@ -1,9 +1,7 @@
-import pandas as pd 
+import pandas
 #write to CSV/EXCEL
-trump_csv = pd.read_json('trump_results.json')
-biden_csv = pd.read_json('biden_results.json')
-trump_csv.to_csv('trump.csv')
-biden_csv.to_csv('biden.csv')
+pandas.read_json('trump_results.json').to_excel('trump.xlsx')
+pandas.read_json('biden_results.json').to_excel('biden.xlsx')
 
 
 #Code from Jupyter Notebook
@@ -45,7 +43,10 @@ for percent in bidencsv_adjusted.iloc[:,2]:
     biden_percent.append(percent)
 
 #adjusting trying to convert to float value
-trump_votes.astype(float)
-plt.axis("equal")
-plt.pie(trump_votes, labels=states, autopct='%0.1f%%')
-trump_axis_votes.show()
+#convert to float
+x = ','.join(trump_votes)
+votes = np.fromstring(x, dtype)
+
+plt.pie(votes, labels=states)
+plt.title("Trump Election chart by votes")
+plt.show()
