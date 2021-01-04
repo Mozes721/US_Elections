@@ -1,52 +1,52 @@
-,state,votes,percent
-0,Alabama,"1,441,170",62.2%
-1,Alaska,"189,543",53.1%
-2,Arizona,"1,661,686",49.1%
-3,Arkansas,"760,647",62.4%
-4,California,"5,982,194",34.3%
-5,Colorado,"1,364,471",41.9%
-6,Connecticut,"715,291",39.2%
-7,Delaware,"200,603",39.8%
-8,Florida,"5,668,731",51.2%
-9,Georgia,"2,461,837",49.3%
-10,Hawaii,"196,602",34.3%
-11,Idaho,"554,128",63.9%
-12,Illinois,"2,438,943",40.5%
-13,Indiana,"1,729,516",57.1%
-14,Iowa,"897,672",53.2%
-15,Kansas,"752,933",56.5%
-16,Kentucky,"1,326,646",62.1%
-17,Louisiana,"1,255,776",58.5%
-18,Maine,"360,480",44%
-19,Maryland,"976,414",32.4%
-20,Massachusetts,"1,167,202",32.3%
-21,Michigan,"2,649,852",47.8%
-22,Minnesota,"1,484,065",45.4%
-23,Mississippi,"756,789",57.6%
-24,Missouri,"1,718,282",56.8%
-25,Montana,"343,647",56.9%
-26,Nebraska,"556,846",58.5%
-27,Nevada,"669,890",47.7%
-28,New Hampshire,"365,660",45.5%
-29,New Jersey,"1,883,260",41.4%
-30,New Mexico,"401,894",43.5%
-31,New York,"3,039,466",41.1%
-32,North Carolina,"2,758,775",50.1%
-33,North Dakota,"235,595",65.5%
-34,Ohio,"3,154,834",53.3%
-35,Oklahoma,"1,020,280",65.4%
-36,Oregon,"958,448",40.7%
-37,Pennsylvania,"3,378,263",48.8%
-38,Rhode Island,"199,922",38.8%
-39,South Carolina,"1,385,103",55.1%
-40,South Dakota,"261,043",61.8%
-41,Tennessee,"1,849,556",60.7%
-42,Texas,"5,890,347",52.1%
-43,Utah,"865,140",58.2%
-44,Vermont,"112,704",30.8%
-45,Virginia,"1,962,430",44.2%
-46,Washington,"1,584,651",39%
-47,Washington Dc,"18,586",5.4%
-48,West Virginia,"545,382",68.6%
-49,Wisconsin,"1,610,184",48.9%
-50,Wyoming,"193,559",70.4%
+,state,Biden_votes,Biden_percent
+0,Alabama,"849,624",36.7
+1,Alaska,"153,502",43
+2,Arizona,"1,672,143",49.4
+3,Arkansas,"423,932",34.8
+4,California,"11,082,293",63.5
+5,Colorado,"1,804,196",55.4
+6,Connecticut,"1,080,680",59.3
+7,Delaware,"296,268",58.8
+8,Florida,"5,297,045",47.9
+9,Georgia,"2,474,507",49.5
+10,Hawaii,"365,802",63.7
+11,Idaho,"287,031",33.1
+12,Illinois,"3,463,260",57.6
+13,Indiana,"1,242,413",41
+14,Iowa,"759,061",45
+15,Kansas,"551,144",41.3
+16,Kentucky,"772,474",36.2
+17,Louisiana,"856,034",39.9
+18,Maine,"434,966",53.1
+19,Maryland,"1,985,023",65.8
+20,Massachusetts,"2,382,202",65.9
+21,Michigan,"2,804,040",50.6
+22,Minnesota,"1,717,077",52.6
+23,Mississippi,"539,508",41.1
+24,Missouri,"1,252,902",41.4
+25,Montana,"244,836",40.6
+26,Nebraska,"374,583",39.4
+27,Nevada,"703,486",50.1
+28,New Hampshire,"424,935",52.9
+29,New Jersey,"2,608,327",57.3
+30,New Mexico,"501,614",54.3
+31,New York,"4,248,123",57.5
+32,North Carolina,"2,684,292",48.7
+33,North Dakota,"114,902",31.9
+34,Ohio,"2,679,165",45.3
+35,Oklahoma,"503,890",32.3
+36,Oregon,"1,340,383",56.9
+37,Pennsylvania,"3,459,923",50
+38,Rhode Island,"307,486",59.7
+39,South Carolina,"1,091,541",43.4
+40,South Dakota,"150,471",35.6
+41,Tennessee,"1,139,332",37.4
+42,Texas,"5,259,126",46.5
+43,Utah,"560,282",37.7
+44,Vermont,"242,820",66.4
+45,Virginia,"2,413,568",54.4
+46,Washington,"2,369,612",58.4
+47,Washington Dc,"317,323",93
+48,West Virginia,"235,984",29.7
+49,Wisconsin,"1,630,866",49.6
+50,Wyoming,"73,491",26.7

@@ -15,6 +15,8 @@ matplotlib==3.3.3
 notebook==6.1.5
 numpy==1.19.4
 pandas==1.1.5
+csv==0.0.13
+plotly==4.14.1
 Pillow==8.0.1
 requests==2.22.0
 Selenium==3.141.0
