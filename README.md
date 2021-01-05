@@ -24,6 +24,10 @@ On macOS and Linux:
 Install the `requirements.txt` Note the latest libraries do not have to be installed for it to run the script sucessfully.
  
  
+You just have to install `state_code.csv` from the repo as other `.csv, .json` files will be created in `scrape_to_json.py` as state codes where not listed in scraped website 
+`https://www.politico.com/2020-election/results/president/`
+
+ 
  # Jupyter Notebook
  
  The Jupyter notebook is a web-based notebook environment for interactive
