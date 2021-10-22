@@ -55,3 +55,7 @@ Launch with:
 ### Running in a remote installation
 
 You need some configuration before starting Jupyter notebook remotely. See [Running a notebook server](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html).
+
+
+Blog post bellow:
+https://medium.com/geekculture/building-date-and-time-zone-with-javascript-6b862f279937
