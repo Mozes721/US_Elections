@@ -58,4 +58,4 @@ You need some configuration before starting Jupyter notebook remotely. See [Runn
 
 
 Blog post bellow:
-https://medium.com/geekculture/building-date-and-time-zone-with-javascript-6b862f279937
+https://medium.datadriveninvestor.com/scraping-us-election-results-and-using-jupyter-notebook-with-plotly-for-data-visualization-8f3d55dda957
